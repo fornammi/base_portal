@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<import resource="classpath:context/common/envPropertyLoader.xml" />
+	<!-- 配置JmsTemplate组件 -->
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+		<property name="sessionTransacted" value="true" />
+		<property name="sessionAcknowledgeModeName" value="SESSION_TRANSACTED" />
+	</bean>
+
+	<!-- 新增Pooled Connection Factory -->
+	<bean id="pooledConnectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<property name="targetConnectionFactory" ref="seashellConnectionFactory" />
+		<property name="sessionCacheSize" value="5" />
+	</bean>
+
+	<bean id="seashellConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate" ref="jndiTemplate" />
+		<property name="jndiName" value="${notify.connection.factory.jndiname}" />
+	</bean>
+	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">${notify.java.naming.factory.initial}</prop>
+				<prop key="java.naming.security.principal">${notify.java.naming.security.principal}</prop>
+				<prop key="java.naming.security.credentials">${notify.java.naming.security.credentials}</prop>
+				<prop key="java.naming.provider.url">${notify.java.naming.provider.url}</prop>
+			</props>
+		</property>
+	</bean>
+</beans>
+
+

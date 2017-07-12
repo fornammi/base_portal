@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="dimInfo">
+
+<select id="queryModelDimInfo" parameterClass="nammi.rule.engine.drools.model.DimInfo" resultClass="nammi.rule.engine.drools.model.DimInfo" >
+select t.DIM_ID as "dimId",t.DIMGROUP_ID as "dimgroupId",t.NAME as "name",
+t.PARENTHESES as "parentheses",t.DIM_ITEM_ID as "dimItemId",t.CALCULATEID as "calculateid",t.CALCULATEVALUE as "calculatevalue",
+t.OPERATOR_COMPARE as "operatorCompare",t.DIM_ITEM_VALUE as "dimItemValue",t.DIM_ITEM_COMPARE_ID as "dimItemCompareId",t.OPERATOR_LOGIC as "operatorLogic",
+t.STATUS as "status",t.CREATE_USER as "createUser",t.CREATE_DATE as "createDate",t.UPDATE_DATE as "updateDate"
+ from T_BP_DIM t 
+ where 1=1
+ <isNotEmpty prepend="and" property="dimId">
+     t.DIM_ID=#dimId#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="dimgroupId">
+     t.DIMGROUP_ID=#dimgroupId#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="name">
+     t.NAME=#name#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="parentheses">
+     t.PARENTHESES=#parentheses#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="dimItemId">
+     t.DIM_ITEM_ID=#dimItemId#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="calculateid">
+     t.CALCULATEID=#calculateid#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="calculatevalue">
+     t.CALCULATEVALUE=#calculatevalue#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="operatorCompare">
+     t.OPERATOR_COMPARE=#operatorCompare#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="dimItemValue">
+     t.DIM_ITEM_VALUE=#dimItemValue#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="dimItemCompareId">
+     t.DIM_ITEM_COMPARE_ID=#dimItemCompareId#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="operatorLogic">
+     t.OPERATOR_LOGIC=#operatorLogic#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="status">
+     t.STATUS=#status#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="createUser">
+     t.CREATE_USER=#createUser#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="createDate">
+     t.CREATE_DATE=#createDate#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="updateDate">
+     t.UPDATE_DATE=#updateDate#
+ </isNotEmpty>
+<isEmpty prepend="order by" property="orderField">
+ t.DIM_ID desc
+ </isEmpty>
+<isNotEmpty prepend="order by" property="orderField">
+ $orderField$
+ </isNotEmpty>
+</select>
+
+<select id="queryMapDimInfo" parameterClass="java.util.HashMap" resultClass="nammi.rule.engine.drools.model.DimInfo" >
+select t.DIM_ID as "dimId",t.DIMGROUP_ID as "dimgroupId",t.NAME as "name",
+t.PARENTHESES as "parentheses",t.DIM_ITEM_ID as "dimItemId",t.CALCULATEID as "calculateid",t.CALCULATEVALUE as "calculatevalue",
+t.OPERATOR_COMPARE as "operatorCompare",t.DIM_ITEM_VALUE as "dimItemValue",t.DIM_ITEM_COMPARE_ID as "dimItemCompareId",t.OPERATOR_LOGIC as "operatorLogic",
+t.STATUS as "status",t.CREATE_USER as "createUser",t.CREATE_DATE as "createDate",t.UPDATE_DATE as "updateDate"
+ from T_BP_DIM t 
+ where 1=1
+ <isNotEmpty prepend="and" property="dimId">
+     t.DIM_ID=#dimId#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="dimgroupId">
+     t.DIMGROUP_ID=#dimgroupId#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="name">
+     t.NAME=#name#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="parentheses">
+     t.PARENTHESES=#parentheses#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="dimItemId">
+     t.DIM_ITEM_ID=#dimItemId#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="calculateid">
+     t.CALCULATEID=#calculateid#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="calculatevalue">
+     t.CALCULATEVALUE=#calculatevalue#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="operatorCompare">
+     t.OPERATOR_COMPARE=#operatorCompare#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="dimItemValue">
+     t.DIM_ITEM_VALUE=#dimItemValue#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="dimItemCompareId">
+     t.DIM_ITEM_COMPARE_ID=#dimItemCompareId#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="operatorLogic">
+     t.OPERATOR_LOGIC=#operatorLogic#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="status">
+     t.STATUS=#status#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="createUser">
+     t.CREATE_USER=#createUser#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="createDate">
+     t.CREATE_DATE=#createDate#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="updateDate">
+     t.UPDATE_DATE=#updateDate#
+ </isNotEmpty>
+<isEmpty prepend="order by" property="orderField">
+ t.DIM_ID desc
+ </isEmpty>
+<isNotEmpty prepend="order by" property="orderField">
+ $orderField$
+ </isNotEmpty>
+</select>
+
+<insert id="insertDimInfo">
+ insert into T_BP_DIM(DIM_ID
+ <isNotEmpty prepend="," property="dimgroupId">
+    DIMGROUP_ID
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="name">
+    NAME
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="parentheses">
+    PARENTHESES
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemId">
+    DIM_ITEM_ID
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="calculateid">
+    CALCULATEID
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="calculatevalue">
+    CALCULATEVALUE
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="operatorCompare">
+    OPERATOR_COMPARE
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemValue">
+    DIM_ITEM_VALUE
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemCompareId">
+    DIM_ITEM_COMPARE_ID
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="operatorLogic">
+    OPERATOR_LOGIC
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="status">
+    STATUS
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="createUser">
+    CREATE_USER
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="createDate">
+    CREATE_DATE
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="updateDate">
+    UPDATE_DATE
+ </isNotEmpty>) 
+values(
+#dimId#
+ <isNotEmpty prepend="," property="dimgroupId">
+    #dimgroupId# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="name">
+    #name# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="parentheses">
+    #parentheses# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemId">
+    #dimItemId# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="calculateid">
+    #calculateid# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="calculatevalue">
+    #calculatevalue# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="operatorCompare">
+    #operatorCompare# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemValue">
+    #dimItemValue# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemCompareId">
+    #dimItemCompareId# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="operatorLogic">
+    #operatorLogic# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="status">
+    #status# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="createUser">
+    #createUser# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="createDate">
+    #createDate# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="updateDate">
+    #updateDate# 
+ </isNotEmpty>
+)
+</insert>
+
+<update id="updateDimInfo">
+ update T_BP_DIM set DIM_ID=DIM_ID
+ <isNotEmpty prepend="," property="dimgroupId">
+    DIMGROUP_ID=#dimgroupId# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="name">
+    NAME=#name# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="parentheses">
+    PARENTHESES=#parentheses# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemId">
+    DIM_ITEM_ID=#dimItemId# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="calculateid">
+    CALCULATEID=#calculateid# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="calculatevalue">
+    CALCULATEVALUE=#calculatevalue# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="operatorCompare">
+    OPERATOR_COMPARE=#operatorCompare# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemValue">
+    DIM_ITEM_VALUE=#dimItemValue# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="dimItemCompareId">
+    DIM_ITEM_COMPARE_ID=#dimItemCompareId# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="operatorLogic">
+    OPERATOR_LOGIC=#operatorLogic# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="status">
+    STATUS=#status# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="createUser">
+    CREATE_USER=#createUser# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="createDate">
+    CREATE_DATE=#createDate# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="updateDate">
+    UPDATE_DATE=#updateDate# 
+ </isNotEmpty>
+where DIM_ID=#dimId#
+</update>
+
+<delete id="deleteDimInfo">
+ delete from T_BP_DIM
+where DIM_ID=#dimId#
+</delete>
+
+</sqlMap>

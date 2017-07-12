@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="com.99bill"
+		module="app-rm-risk"
+		revision="working@sh401030102004"
+		conf="compile"
+		confs="default, compile, zip, test"
+		date="20161104151932"/>
+	<dependencies>
+		<module organisation="org.apache" name="servlet-api">
+			<revision name="2.4" status="release" pubdate="20130913180114" resolver="bill99_repository.public" artresolver="bill99_repository.public" downloaded="false" searched="false" default="true" conf="default" position="2">
+				<metadata-artifact status="no" details="" size="398" time="0" location="D:\Local_Repository\repository\ivy-cache\org.apache\servlet-api\ivy-2.4.xml" searched="false" origin-is-local="false" origin-location="http://192.168.52.211/org.apache/servlet-api/ivys/ivy-2.4.xml"/>
+				<caller organisation="com.99bill" name="app-rm-risk" conf="compile" rev="2.4" rev-constraint-default="2.4" rev-constraint-dynamic="2.4" callerrev="working@sh401030102004"/>
+				<artifacts>
+					<artifact name="servlet-api" type="jar" ext="jar" status="no" details="" size="143939" time="0" location="D:\Local_Repository\repository\ivy-cache\org.apache\servlet-api\jars\servlet-api-2.4.jar">
+						<origin-location is-local="false" location="http://192.168.52.211/org.apache/servlet-api/jars/servlet-api-2.4.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="oracle" name="ojdbc">
+			<revision name="1.4" status="release" pubdate="20100719202003" resolver="bill99_repository.public" artresolver="bill99_repository.public" downloaded="false" searched="false" default="true" conf="default" position="1">
+				<metadata-artifact status="no" details="" size="382" time="0" location="D:\Local_Repository\repository\ivy-cache\oracle\ojdbc\ivy-1.4.xml" searched="false" origin-is-local="false" origin-location="UNKNOWN"/>
+				<caller organisation="com.99bill" name="app-rm-risk" conf="compile" rev="1.4" rev-constraint-default="1.4" rev-constraint-dynamic="1.4" callerrev="working@sh401030102004"/>
+				<artifacts>
+					<artifact name="ojdbc" type="jar" ext="jar" status="no" details="" size="1378346" time="0" location="D:\Local_Repository\repository\ivy-cache\oracle\ojdbc\jars\ojdbc-1.4.jar">
+						<origin-location is-local="false" location="UNKNOWN"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+		<module organisation="mysql" name="mysql-connector-java">
+			<revision name="5.1.12" status="release" pubdate="20121121152422" resolver="bill99_repository.public" artresolver="bill99_repository.public" downloaded="false" searched="false" default="true" conf="default" position="0">
+				<metadata-artifact status="no" details="" size="414" time="0" location="D:\Local_Repository\repository\ivy-cache\mysql\mysql-connector-java\ivy-5.1.12.xml" searched="false" origin-is-local="false" origin-location="http://192.168.52.211/mysql/mysql-connector-java/ivys/ivy-5.1.12.xml"/>
+				<caller organisation="com.99bill" name="app-rm-risk" conf="compile" rev="5.1.12" rev-constraint-default="5.1.12" rev-constraint-dynamic="5.1.12" callerrev="working@sh401030102004"/>
+				<artifacts>
+					<artifact name="mysql-connector-java" type="jar" ext="jar" status="no" details="" size="732695" time="0" location="D:\Local_Repository\repository\ivy-cache\mysql\mysql-connector-java\jars\mysql-connector-java-5.1.12.jar">
+						<origin-location is-local="false" location="http://192.168.52.211/mysql/mysql-connector-java/jars/mysql-connector-java-5.1.12.jar"/>
+					</artifact>
+				</artifacts>
+			</revision>
+		</module>
+	</dependencies>
+</ivy-report>

@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<#include "/common/common.html" />
+<link rel="stylesheet" style="txt/css" href="${imgRoot}/css/main.css" />
+<script type="text/javascript" src="${imgRoot}/js/main/main.js"></script>
+<title>DIM编辑</title>
+</head>
+<body>
+<div id="layout">
+	<div id="content">
+	<form name="dimForm" action="${imgRoot}/rule/dim/saveDim.htm" method="post">
+		<table>
+			<tr>
+				<td>
+					<input type="button" value="添加规则">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table>
+						<thead>
+							<tr>
+								<th>DIM名称</th>
+								<th>DIM</th>
+								<th>操作符</th>
+								<th>阈值</th>
+								<th>DIM关系符</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input type="text" id="dimName" name="dimName" value="${dimInfo.name!}" >
+								</td>
+								<td>
+									<select id="dimItemId" name="dimItemId">
+										<option>---请选择---</option>
+										<#if dimList??>
+										<#list dimList as dim>
+											<option value="${dim.id}" <#if dimInfo.dimItemId?? && dim.id==dimInfo.dimItemId>selected</#if> >${dim.desc}</option>
+										</#list>
+										</#if>
+									</select>
+								</td>
+									<select id="calculateId" name="calculateId">
+										<option>---请选择---</option>
+										<#if operatorCompareMap??>
+										<#assign mapKeys = operatorCompareMap?keys>
+										<#list mapKeys as operator>
+										<option value=${operator.id} <#if dimInfo.calculateId?? && dimInfo.calculateId==operator.id>selected</#if> >${operator.desc}</option>
+										</#list>
+										</#if>
+									</select>
+								<td>
+								<td>
+									<input type="text" id="dimItemValue" name="dimItemValue" value="${dimInfo.dimItemValue!}" >
+								</td>
+								<td>
+									<select id="operatorLogic" name="operatorLogic">
+										<option value="">请选择</option>
+										<option value="&&" <#if dim.operatorLogic?? && dim.operatorLogic == '&&'>selected="selected"</#if> >与</option>
+										<option value="||" <#if dim.operatorLogic?? && dim.operatorLogic == '||'>selected="selected"</#if> >或</option>
+									</select>
+								</td>
+								<td>
+									<td><a href="javascript:void(0);" onclick="removeDim(this);">删除</a></td>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button id="submit" type="submit">保存</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</div>
+	<div id="footer">
+		版权所有 违者必究<br />
+		作者：nammi
+	</div>
+</div>
+</body>
+</html>

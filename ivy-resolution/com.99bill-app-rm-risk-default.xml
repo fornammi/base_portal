@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="ivy-report.xsl"?>
+<ivy-report version="1.0">
+	<info
+		organisation="com.99bill"
+		module="app-rm-risk"
+		revision="working@sh401030102004"
+		conf="default"
+		confs="default, compile, zip, test"
+		date="20161104151932"/>
+	<dependencies>
+	</dependencies>
+</ivy-report>

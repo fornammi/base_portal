@@ -1,0 +1,132 @@
+<?xml version="1.0" ?>
+<project name="base-portal" default="deploy" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property name="ivy.lib.dir" value="extLib" />
+
+	<ivy:settings file="${ivy.settings.dir}/ivysettings.xml" />
+
+	<!-- Some properties about certain application -->
+	<property file="buildTest.properties" />
+
+	<!-- Root directory for deploy WAR -->
+	<property name="deploy_root" value="${server.home}" />
+
+	<!-- Name of WAR -->
+	<property name="war.name" value="${app.name}" />
+
+	<!-- Root physical directory for deployment. -->
+	<property name="deploy.root" value="${deploy_root}/${war.name}" />
+
+	<!-- Directory for deploy configuration file -->
+	<property name="deploy.conf" value="${deploy.root}/WEB-INF" />
+
+	<!-- Directory for deploy library -->
+	<property name="deploy.lib" value="${deploy.root}/WEB-INF/lib" />
+
+	<!-- Directory for deploy classes -->
+	<property name="deploy.class" value="${deploy.root}/WEB-INF/classes" />
+
+
+	<!-- Directory for Java source -->
+	<property name="src" value="./src/main/java" />
+	<property name="res" value="./src/main/resources" />
+
+	<!-- Directory for jsp content -->
+	<property name="jsp" value="./src/main/webapp" />
+
+	<!-- Directory for lib content -->
+	<property name="lib" value="./extLib" />
+
+	
+	<!-- Directory for conf content -->
+	<property name="conf" value="./src/main/webapp/WEB-INF" />
+
+	<!-- Directory for classes content -->
+	<property name="classes" value="./bin" />
+
+
+	<!-- Directory for META-INF content -->
+	<property name="meta" value="./src/main/webapp/META-INF" />
+
+	<path id="classpath">
+		<fileset dir="${lib}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="init">
+		<delete dir="extLib" />
+		<mkdir dir="${classes}" />
+	</target>
+
+	<target name="initForDeploy">
+		<mkdir dir="${deploy.root}" />
+		<mkdir dir="${deploy.conf}" />
+		<mkdir dir="${deploy.lib}" />
+		<mkdir dir="${deploy.class}" />
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${classes}" source="1.5" deprecation="on" includes="**/*.java" encoding="UTF-8">
+			<classpath refid="classpath" />
+		</javac>
+		<echo>compile ok...............</echo>
+	</target>
+
+	<!-- Delete all contents (file and directory) in ${bin} and ${deploy.root} -->
+	<target name="clear" depends="init">
+		<delete dir="${classes}" />
+		<mkdir dir="${classes}" />
+		<delete dir="${deploy.root}" />
+		<mkdir dir="${deploy.root}" />
+		<delete dir="extLib" />
+		<mkdir dir="extLib" />
+	</target>
+
+	<target name="clearMe" depends="init">
+		<delete dir="${classes}" />
+		<mkdir dir="${classes}" />
+	</target>
+
+
+	<target name="retrieveJar" description="description">
+		<ivy:retrieve haltonfailure="false" />
+	</target>
+	
+	<target name="convertEncoding" >
+	  	<native2ascii encoding="GBK" src="${classes}/properties" dest="${conf}" includes="**/*.native" ext=".properties" />
+	  </target>
+
+
+	<target name="deploy" depends="init, initForDeploy,retrieveJar,compile">
+		<echo>${ivy.lib.dir}}</echo>
+		<copy todir="${classes}">
+			<fileset dir="${src}">
+				<include name="**/*.txt" />
+				<include name="**/*.xml" />
+				<include name="**/*.properties" />
+			</fileset>
+			<fileset dir="${res}">
+				<include name="**/*.txt" />
+				<include name="**/*.xml" />
+				<include name="**/*.properties" />
+			</fileset>
+		</copy>
+		<copy todir="${deploy.class}">
+			<fileset dir="${classes}" />
+		</copy>
+
+		<copy todir="${deploy.lib}">
+			<fileset dir="${lib}" />
+		</copy>
+
+		<copy todir="${deploy.conf}">
+			<fileset dir="${conf}" />
+		</copy>
+
+		<copy todir="${deploy.root}">
+			<fileset dir="${jsp}" />
+		</copy>
+		<echo>deploy ok...............</echo>
+	</target>
+</project>

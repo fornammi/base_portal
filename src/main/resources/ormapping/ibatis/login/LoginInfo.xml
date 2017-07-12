@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="loginInfo">
+
+<select id="queryModelLoginInfo" parameterClass="nammi.login.model.LoginInfo" resultClass="nammi.login.model.LoginInfo" >
+select t.ID as "id",t.CODE_NO as "codeNo",t.LOGIN_CODE as "loginCode",
+t.PASSWORD as "password",t.STATUS as "status"
+ from login_info t 
+ where 1=1
+ <isNotEmpty prepend="and" property="id">
+     t.ID=#id#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="codeNo">
+     t.CODE_NO=#codeNo#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="loginCode">
+     t.LOGIN_CODE=#loginCode#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="password">
+     t.PASSWORD=#password#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="status">
+     t.STATUS=#status#
+ </isNotEmpty>
+<isEmpty prepend="order by" property="orderField">
+ t.ID desc
+ </isEmpty>
+<isNotEmpty prepend="order by" property="orderField">
+ $orderField$
+ </isNotEmpty>
+</select>
+
+<select id="queryMapLoginInfo" parameterClass="java.util.HashMap" resultClass="nammi.login.model.LoginInfo" >
+select t.ID as "id",t.CODE_NO as "codeNo",t.LOGIN_CODE as "loginCode",
+t.PASSWORD as "password",t.STATUS as "status"
+ from login_info t 
+ where 1=1
+ <isNotEmpty prepend="and" property="id">
+     t.ID=#id#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="codeNo">
+     t.CODE_NO=#codeNo#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="loginCode">
+     t.LOGIN_CODE=#loginCode#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="password">
+     t.PASSWORD=#password#
+ </isNotEmpty>
+ <isNotEmpty prepend="and" property="status">
+     t.STATUS=#status#
+ </isNotEmpty>
+<isEmpty prepend="order by" property="orderField">
+ t.ID desc
+ </isEmpty>
+<isNotEmpty prepend="order by" property="orderField">
+ $orderField$
+ </isNotEmpty>
+</select>
+
+<insert id="insertLoginInfo">
+ insert into login_info(ID
+ <isNotEmpty prepend="," property="codeNo">
+    CODE_NO
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="loginCode">
+    LOGIN_CODE
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="password">
+    PASSWORD
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="status">
+    STATUS
+ </isNotEmpty>) 
+values(
+#id#
+ <isNotEmpty prepend="," property="codeNo">
+    #codeNo# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="loginCode">
+    #loginCode# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="password">
+    #password# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="status">
+    #status# 
+ </isNotEmpty>
+)
+</insert>
+
+<update id="updateLoginInfo">
+ update login_info set ID=ID
+ <isNotEmpty prepend="," property="codeNo">
+    CODE_NO=#codeNo# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="loginCode">
+    LOGIN_CODE=#loginCode# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="password">
+    PASSWORD=#password# 
+ </isNotEmpty>
+ <isNotEmpty prepend="," property="status">
+    STATUS=#status# 
+ </isNotEmpty>
+where ID=#id#
+</update>
+
+<delete id="deleteLoginInfo">
+ delete from login_info
+where ID=#id#
+</delete>
+
+</sqlMap>

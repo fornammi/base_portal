@@ -1,0 +1,10 @@
+div#layout{width:100%;}
+div#header{height:53px; top:20px; background-color:#99bbbb;}
+div#menu{background-color:#ffff99;height:100%;width:300px;float:left;}
+div#content{background-color:#EEEEEE;height:100%;width:700px;float:left;}
+div#tabNav{background-color:#ffffff;height:53px;top:20px;width:700px}
+div#tabContent{background-color:#EEEEEE;height:520px;width:700px}
+div#pageContent{background-color:#EEEEEE;height:500px;top:20px;width:700px}
+div#footer{background-color:#99bbbb;clear:both;text-align:center;}
+ul{margin:0;}
+li{list-style:none;}

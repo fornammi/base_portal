@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="baseDS" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="user">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+	</bean>
+
+	<bean id="sqlMapClientBase" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="baseDS" />
+		<property name="configLocation" value="classpath:context/ibatis/sqlmap-config.xml" />
+		<property name="mappingLocations">
+			<list>
+				<value>classpath*:ormapping/ibatis/login/*.xml</value>
+			</list>
+		</property>
+		<!-- <property name="lobHandler" ref="lobHandler" /> -->
+	</bean>
+
+	<bean id="sqlMapDaoBase" class="com.bill99.inf.ibatis.SqlMapDao"
+		scope="prototype">
+		<property name="dao" ref="sqlMapClientBase" />
+	</bean>
+	
+	
+
+	<!-- 配置DBCP数据源 -->
+	<!-- <bean id="dbcp_dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+
+		<property name="defaultAutoCommit">
+			<value>${jdbc.defaultAutoCommit}</value>
+		</property>
+	</bean> -->
+	
+	<!-- 配置BenCp数据源 -->
+    <!-- <bean id="bonecp_dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+        <property name="driverClass">
+            <value>${jdbc.driverClassName}</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>${jdbc.url}</value>
+        </property>
+        <property name="username">
+            <value>${jdbc.username}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+    </bean> -->
+	
+	<!-- ibatis conf	begin -->
+	
+	<!-- ibatis conf	end -->
+
+	<!-- hibernate conf		begin -->
+	<!-- <bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dbcp_dataSource" />
+		ORM映射文件:mappingResources
+		ORM目录
+		<property name="mappingDirectoryLocations">
+			<value>classpath:com/bless/ospm/model/hbm/</value>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				数据库方言
+				<prop key="hibernate.dialect">${jdbc.hibernate.dialect}</prop>
+                控制台是否打印SQL
+				<prop key="hibernate.show_sql">${jdbc.hibernate.show_sql}</prop>
+				控制台是否格式化SQL语句显示样式
+				<prop key="hibernate.format_sql">${jdbc.hibernate.format_sql}</prop>
+				启用服务器时，检查hbm文件是否与数据库对应，不对应则抛出异常
+				<prop key="hibernate.hbm2ddl.auto">validate</prop>
+				是否使用二级缓存
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				启用缓存机制
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				指定缓存提供商
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				QueryCacheFactory的实现类 
+				<prop key="hibernate.cache.query_cache_factory">org.hibernate.cache.StandardQueryCacheFactory</prop>
+			</props>
+		</property>
+		
+	</bean> -->
+
+
+	<!-- 配置事务 -->
+	<!-- <bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean> -->
+
+	<!-- <bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		 事务拦截器bean需要依赖注入一个事务管理器
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			 下面定义事务传播属性
+			<props>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="query*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="edit*">PROPAGATION_REQUIRED</prop>
+				<prop key="del*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				其它情况
+				<prop key="do*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean> -->
+	<!-- hibernate conf		end -->
+
+	<!-- 定义BeanNameAutoProxyCreator-->
+	<!-- <bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		 指定对满足哪些bean name的bean自动生成业务代理
+		<property name="beanNames">
+			 下面是所有需要自动创建事务代理的bean
+			<list>
+				<value>baseServiceBean</value>
+				<value>loginInfoServiceBean</value>
+			</list>
+			 此处可增加其他需要自动创建事务代理的bean
+		</property>
+		 下面定义BeanNameAutoProxyCreator所需的事务拦截器
+		<property name="interceptorNames">
+			<list>
+				此处可增加其他新的Interceptor
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean> -->
+
+	
+</beans>
