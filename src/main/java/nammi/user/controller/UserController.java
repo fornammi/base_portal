@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/user/*")
 public class UserController {
 
-	@RequestMapping(value = "toUserPage")
+	@RequestMapping(value = "toUserPage.htm")
 	public String toUserPage(){
 		return "user/user_manage";
 	}
 	
-	@RequestMapping(value = "toPrivPage")
+	@RequestMapping(value = "toPrivPage.htm")
 	public String toPrivPage(){
 		return "priv/priv_manage";
 	}

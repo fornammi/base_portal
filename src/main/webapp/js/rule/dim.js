@@ -7,8 +7,6 @@ $(function(){
 	$("#btnAdd").button().click(cuntion(){
 		addDim();
 	});
-	
-	
 });
 
 
@@ -17,7 +15,7 @@ function queryData(){
 	var url = $form.attr("action");
 	$.ajax({
 		type:"POST",
-		url:url,
+		url:url+"&method=queryData",
 		data:$form.serializeArray(),
 		dataType:"html",
 		cache:false,

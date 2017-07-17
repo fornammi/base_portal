@@ -1,7 +1,10 @@
-package nammi.rule.engine.drools.model;
+package nammi.rule.model;
 
-public class DimInfo{
-    private Long dimId;
+import java.io.Serializable;
+
+public class DimInfo implements Serializable{
+	private static final long serialVersionUID = 6247702071700594643L;
+	private Long dimId;
     private Long dimgroupId;
     private String name;
     private String parentheses;

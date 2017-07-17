@@ -1,4 +1,4 @@
-package nammi.rule.engine.drools.model;
+package nammi.rule.model;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,7 +1,7 @@
-package nammi.rule.engine.drools.constant;
+package nammi.rule.constant;
 
 /**
- * 指标-数据类型
+ * DIM项-数据类型
  * @author daniel.fang
  *
  */

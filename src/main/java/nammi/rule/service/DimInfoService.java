@@ -1,12 +1,17 @@
-package nammi.rule.engine.drools.service;
+package nammi.rule.service;
 
-import nammi.rule.engine.drools.model.DimInfo;
-import nammi.rule.engine.drools.dao.DimInfoDao;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Service;
+
 import com.bill99.inf.ibatis.PageInfo;
 
+import nammi.rule.dao.DimInfoDao;
+import nammi.rule.model.DimInfo;
 
+
+//@Service
 public class DimInfoService{
   private DimInfoDao dimInfoDao;
 

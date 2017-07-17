@@ -1,10 +1,15 @@
-package nammi.rule.engine.drools.constant;
+package nammi.rule.constant;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * DIM项枚举类
+ * @author daniel.fang
+ *
+ */
 public enum DimItemEnum {
 	
 	DIM_1(1L, "交易金额", "txnAmount", null, DimItemTypeConstants.DIM_ITEM_TYPE_NUMBER),

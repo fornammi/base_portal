@@ -10,7 +10,9 @@ $(function(){
 });
 
 function addTab(tabId, title, url){
-	alert("nammi@tabId:"+tabId+"@title:"+title+"@url:"+url);
+	console.log("nammi@tabId:"+tabId+"@title:"+title+"@url:"+url);
+	console.log("test:"+($("#"+tabId).html() == null));
+	console.log("test:"+($("#"+tabId).html()));
 	if($("#"+tabId).html() == null){
 		$("#tabNav").find("ul").append("<li>");
 		$("#tabNav").find("ul").append("<a href=" +url+ " target='rightContent'>" +title+ "</a>");
@@ -20,7 +22,7 @@ function addTab(tabId, title, url){
 }
 
 function showTab(tabId, url){
-	alert("nammi@showTab@tabId:"+tabId+"@url:"+url);
-	alert("nammi@showTab");
+	console.log("nammi@showTab@tabId:"+tabId+"@url:"+url);
+	console.log("nammi@showTab");
 	$("#pageContent").find("iframe").attr("id", tabId).attr("src", url);
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 <sqlMap namespace="dimInfo">
 
-<select id="queryModelDimInfo" parameterClass="nammi.rule.engine.drools.model.DimInfo" resultClass="nammi.rule.engine.drools.model.DimInfo" >
+<select id="queryModelDimInfo" parameterClass="nammi.rule.model.DimInfo" resultClass="nammi.rule.model.DimInfo" >
 select t.DIM_ID as "dimId",t.DIMGROUP_ID as "dimgroupId",t.NAME as "name",
 t.PARENTHESES as "parentheses",t.DIM_ITEM_ID as "dimItemId",t.CALCULATEID as "calculateid",t.CALCULATEVALUE as "calculatevalue",
 t.OPERATOR_COMPARE as "operatorCompare",t.DIM_ITEM_VALUE as "dimItemValue",t.DIM_ITEM_COMPARE_ID as "dimItemCompareId",t.OPERATOR_LOGIC as "operatorLogic",
@@ -62,7 +62,7 @@ t.STATUS as "status",t.CREATE_USER as "createUser",t.CREATE_DATE as "createDate"
  </isNotEmpty>
 </select>
 
-<select id="queryMapDimInfo" parameterClass="java.util.HashMap" resultClass="nammi.rule.engine.drools.model.DimInfo" >
+<select id="queryMapDimInfo" parameterClass="java.util.HashMap" resultClass="nammi.rule.model.DimInfo" >
 select t.DIM_ID as "dimId",t.DIMGROUP_ID as "dimgroupId",t.NAME as "name",
 t.PARENTHESES as "parentheses",t.DIM_ITEM_ID as "dimItemId",t.CALCULATEID as "calculateid",t.CALCULATEVALUE as "calculatevalue",
 t.OPERATOR_COMPARE as "operatorCompare",t.DIM_ITEM_VALUE as "dimItemValue",t.DIM_ITEM_COMPARE_ID as "dimItemCompareId",t.OPERATOR_LOGIC as "operatorLogic",

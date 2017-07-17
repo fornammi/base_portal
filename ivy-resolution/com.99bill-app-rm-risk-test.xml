@@ -7,9 +7,9 @@
 		revision="working@sh401030102004"
 		conf="test"
 		confs="default, compile, zip, test"
-		date="20161104151932"/>
+		date="20170717152250"/>
 	<dependencies>
-		<module organisation="unknown" name="c3p0">
+		<module organisation="unknown" name="c3p0" >
 			<revision name="0.9.1.2" status="release" pubdate="20121121152754" resolver="bill99_repository.public" artresolver="bill99_repository.public" downloaded="false" searched="false" default="true" conf="default" position="2">
 				<metadata-artifact status="no" details="" size="385" time="0" location="D:\Local_Repository\repository\ivy-cache\unknown\c3p0\ivy-0.9.1.2.xml" searched="false" origin-is-local="false" origin-location="http://192.168.52.211/unknown/c3p0/ivys/ivy-0.9.1.2.xml"/>
 				<caller organisation="com.99bill" name="app-rm-risk" conf="test" rev="0.9.1.2" rev-constraint-default="0.9.1.2" rev-constraint-dynamic="0.9.1.2" callerrev="working@sh401030102004"/>
@@ -20,7 +20,7 @@
 				</artifacts>
 			</revision>
 		</module>
-		<module organisation="org.springframework" name="spring-test">
+		<module organisation="org.springframework" name="spring-test" >
 			<revision name="3.0.2.RELEASE" status="release" pubdate="20121114161914" resolver="bill99_repository.public" artresolver="bill99_repository.public" downloaded="false" searched="false" default="true" conf="default" position="1">
 				<metadata-artifact status="no" details="" size="417" time="0" location="D:\Local_Repository\repository\ivy-cache\org.springframework\spring-test\ivy-3.0.2.RELEASE.xml" searched="false" origin-is-local="false" origin-location="http://192.168.52.211/org.springframework/spring-test/ivys/ivy-3.0.2.RELEASE.xml"/>
 				<caller organisation="com.99bill" name="app-rm-risk" conf="test" rev="3.0.2.RELEASE" rev-constraint-default="3.0.2.RELEASE" rev-constraint-dynamic="3.0.2.RELEASE" callerrev="working@sh401030102004"/>
@@ -31,7 +31,7 @@
 				</artifacts>
 			</revision>
 		</module>
-		<module organisation="org.junit" name="junit">
+		<module organisation="org.junit" name="junit" >
 			<revision name="4.8.2" status="release" pubdate="20121121152550" resolver="bill99_repository.public" artresolver="bill99_repository.public" downloaded="false" searched="false" default="true" conf="default" position="0">
 				<metadata-artifact status="no" details="" size="387" time="0" location="D:\Local_Repository\repository\ivy-cache\org.junit\junit\ivy-4.8.2.xml" searched="false" origin-is-local="false" origin-location="http://192.168.52.211/org.junit/junit/ivys/ivy-4.8.2.xml"/>
 				<caller organisation="com.99bill" name="app-rm-risk" conf="test" rev="4.8.2" rev-constraint-default="4.8.2" rev-constraint-dynamic="4.8.2" callerrev="working@sh401030102004"/>

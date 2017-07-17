@@ -25,6 +25,7 @@
 		<property name="mappingLocations">
 			<list>
 				<value>classpath*:ormapping/ibatis/login/*.xml</value>
+				<value>classpath*:ormapping/ibatis/rule/*.xml</value>
 			</list>
 		</property>
 		<!-- <property name="lobHandler" ref="lobHandler" /> -->

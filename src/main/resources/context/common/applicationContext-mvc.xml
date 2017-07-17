@@ -108,6 +108,7 @@
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath">
+			<!-- 配置视图的时候最后有斜杠，在RequestMapping注解中不用再用斜杠开始 -->
 			<value>/WEB-INF/ftl/</value>
 		</property>
 		<property name="freemarkerSettings">
@@ -123,7 +124,7 @@
 		<property name="freemarkerVariables">
 			<map>
 				<entry key="xml_escape" value-ref="fmXmlEscape" />
-				<entry key="imgRoot" value="http://localhost:8080/base-portal" />
+				<entry key="imgRoot" value="/base-portal" />
 			</map>
 		</property>
 	</bean>

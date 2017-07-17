@@ -1,10 +1,15 @@
-package nammi.rule.engine.drools.dao;
+package nammi.rule.dao;
 
-import nammi.rule.engine.drools.model.DimInfo;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
 import com.bill99.inf.ibatis.PageInfo;
 
+import nammi.rule.model.DimInfo;
+
+//@Repository
 public class DimInfoDao extends com.bill99.inf.ibatis.BaseDao{
 	public DimInfo createDimInfo(DimInfo model){
 		//model.setId(super.getSequence("seqName"));//如果主键是sequence生成

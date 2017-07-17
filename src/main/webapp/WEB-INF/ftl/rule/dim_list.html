@@ -8,9 +8,8 @@
 			<th>DIM关系符</th>
 		</tr>
 	</thead>
-	<tbody>
 	<#if dataList?? && dataList?size gt 0>
-	<#list dataList as data>
+		<#list dataList as data>
 		<tr>
 			<td>
 				<input type="text" id="dimName" name="dimName" value="${data.name!}" >
@@ -49,7 +48,10 @@
 				<td><a href="javascript:void(0);" onclick="removeDim(this);">删除</a></td>
 			</td>
 		</tr>
-	</#list>
+		</#list>
+	<#else>
+		<tr>
+			<font color="red"><strong>无符合条件记录！</strong></font>
+		</tr>
 	</#if>
-	</tbody>
 </table>

@@ -19,4 +19,15 @@
 		<property name="loginInfoDao" ref="loginInfoDao"></property>
 	</bean>
 	
+	
+	<bean id="dimInfoDao" class="nammi.rule.dao.DimInfoDao">
+		<property name="dao" ref="sqlMapDaoBase"></property>
+	</bean>
+
+	<bean id="dimInfoService" class="nammi.rule.service.DimInfoService">
+		<property name="dimInfoDao" ref="dimInfoDao"></property>
+	</bean>
+	
+	
+	
 </beans>

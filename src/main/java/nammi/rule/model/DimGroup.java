@@ -1,7 +1,7 @@
 /**
  * 
  */
-package nammi.rule.engine.drools.model;
+package nammi.rule.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -35,7 +35,7 @@ public class DimGroup implements Serializable {
 	private Date createDate;	//创建日期
 	private Date updateTime;	//最后更新时间
 	
-	private List<Dim> dimList;	//关联dim集
+	private List<DimInfo> dimList;	//关联dim集
 	
 	public Long getId() {
 		return id;
@@ -97,10 +97,10 @@ public class DimGroup implements Serializable {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
-	public List<Dim> getDimList() {
+	public List<DimInfo> getDimList() {
 		return dimList;
 	}
-	public void setDimList(List<Dim> dimList) {
+	public void setDimList(List<DimInfo> dimList) {
 		this.dimList = dimList;
 	}
 }
