@@ -5,7 +5,7 @@
 	<classpathentry kind="src" path="src/main/webapp"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" path="src/test/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?ivyXmlPath=ivy.xml&amp;confs=*"/>
 	<classpathentry kind="lib" path="src/main/resources/lib/if-redis-ext-1.0.3.1.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/lib/spring-data-redis-1.4.2.jar"/>
