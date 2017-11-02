@@ -1,18 +1,22 @@
 package redis;
 
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import net.sf.json.JSONObject;
-
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.PropertyConfigurator;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import com.bill99.rm.skeye.aba.model.MamCustomer;
-
+import com.bill99.golden.inf.sso.util.CM;
+import com.bill99.rm.skeye.rtms.parallel.bo.MerchantLimit;
 
 public class RedisTemplateHelper {
 	/**
@@ -28,20 +32,28 @@ public class RedisTemplateHelper {
 	
 	public final static String CACHE_KEY_MEMBER_INFO = "MamMemberInfo."; //memberInfo
 	
+	/**
+	 * 三合一开关 (限额/规则/黑白名单)(1：打开；0：关闭；默认为1)
+	 */
+	public final static String RTMS_TRADE_FLAG = "RTMS_TRADE_FLAG";
+	
 	public static void main(String[] args) {
 		URL configURL = RedisTemplateHelper.class.getResource("/properties/log4j.properties");
 		PropertyConfigurator.configure(configURL);
 		ApplicationContext ac = new FileSystemXmlApplicationContext(new String[]{
 						"classpath*:redis/redis_dev.xml"
 				});
-		//RedisTemplate<String, Object> redisObjTemplate = (RedisTemplate<String, Object>)ac.getBean("strObjRedisTemplate");
-		RedisTemplate<String, Object> redisHashObjTemplate1 = (RedisTemplate<String, Object>)ac.getBean("strHashRedisTemplate");
-		String mailKey = "noticeType";
-		//设置值
-		//redisHashObjTemplate1.opsForValue().set(mailKey, 1);
-		System.out.println("curMailNo:key="+mailKey+"|value="+redisHashObjTemplate1.opsForValue().get(mailKey));
-		System.out.println("nextMailNo:key="+mailKey+"|value="+genMailNo(redisHashObjTemplate1, mailKey));
-		System.out.println("aftergenMailNo, curMailNo:key="+mailKey+"|value="+redisHashObjTemplate1.opsForValue().get(mailKey));
+		RedisTemplate<String, Object> stringRedisTemplate = (RedisTemplate<String, Object>)ac.getBean("stringRedisTemplate");
+		RedisTemplate<String, Object> redisObjTemplate = (RedisTemplate<String, Object>)ac.getBean("strObjRedisTemplate");
+		RedisTemplate<String, Object> redisHashTemplate = (RedisTemplate<String, Object>)ac.getBean("strHashRedisTemplate");
+		
+		
+		//开关
+		/*String val = (String)stringRedisTemplate.opsForValue().get(RTMS_TRADE_FLAG);
+		System.out.println(val);*/
+		
+		/*String mailKey = "noticeType";
+		testMailNo(redisHashTemplate, mailKey);*/
 		
 		/*RedisTemplate<String, MamCustomer> redisTemplate = (RedisTemplate<String, MamCustomer>)ac.getBean("strHashRedisTemplate");
 		//String objKey = CACHE_KEY_RATEDATA_MERCHANT_TXN + "10012077336";
@@ -73,6 +85,17 @@ public class RedisTemplateHelper {
 			//queryList(redisTemplate, objKey);
 		}*/
 		
+		//测试redis hash存储java对象
+		testHashStoredObj(redisHashTemplate);
+	}
+	
+	
+	public static void testMailNo(RedisTemplate<String, Object> redisTemplate, String mailKey){
+		//设置值
+		//redisHashObjTemplate1.opsForValue().set(mailKey, 1);
+		System.out.println("curMailNo:key="+mailKey+"|value="+redisTemplate.opsForValue().get(mailKey));
+		System.out.println("nextMailNo:key="+mailKey+"|value="+genMailNo(redisTemplate, mailKey));
+		System.out.println("aftergenMailNo, curMailNo:key="+mailKey+"|value="+redisTemplate.opsForValue().get(mailKey));
 	}
 	
 	
@@ -121,4 +144,125 @@ public class RedisTemplateHelper {
 		String newStr = String.format("%0"+maxLen+"d", curNum);
 		return newStr;
 	}
+	
+	/**
+	 * 测试hash存储对象
+	 * @param redisHashTemplate	必须是bean id="strHashRedisTemplate"这个
+	 */
+	public static void testHashStoredObj(RedisTemplate redisHashTemplate){
+		String redisKey = "MERCHANT_LIMIT";
+		//>>>>>1.delete
+		//redisHashTemplate.opsForHash().delete(redisKey, "1", "2", "3", "4", "99", "100");
+		//>>>>>2.put
+		//putObjectInHash(redisHashTemplate, redisKey);
+		//>>>>>3.get
+		getObjectFromHash(redisHashTemplate, redisKey);
+	}
+	
+	/**
+	 * opForHash-put
+	 * @param redisHashTemplate
+	 * @param redisKey
+	 */
+	public static void putObjectInHash(RedisTemplate redisHashTemplate, String redisKey){
+		//single put
+		MerchantLimit m1 = new MerchantLimit();
+		m1.setId(100L);
+		m1.setUpMerchantId("812025145110002");
+		m1.setPayMode("0");
+		m1.setMinLimit(new BigDecimal(2));
+		m1.setMaxLimit(new BigDecimal(3));
+		m1.setCreaterCode("nammi100");
+		redisHashTemplate.opsForHash().put(redisKey, CM.toString(m1.getId()), m1);
+		//map put
+		/*Map<String, MerchantLimit> limitMap = new HashMap<String, MerchantLimit>();
+		for(int i=1; i<5; i++){
+			Long iLong = CM.toLongObj(i);
+			MerchantLimit tmp = new MerchantLimit();
+			tmp.setId(iLong);
+			tmp.setUpMerchantId(CM.toString(i));
+			tmp.setMinLimit(new BigDecimal(iLong));
+			tmp.setMaxLimit(new BigDecimal(iLong + 99L));
+			tmp.setCreaterName("nammi"+i);
+			//redis hash中Map的key必须为String
+			limitMap.put(CM.toString(i), tmp);
+		}*/
+		//put in redis:by Map
+		//redisHashTemplate.opsForHash().putAll(redisKey, limitMap);
+	}
+	
+	/**
+	 * opForHash-get
+	 * @param redisHashTemplate
+	 * @param redisKey
+	 */
+	public static void getObjectFromHash(RedisTemplate redisHashTemplate, String redisKey){
+		/*System.out.println("=====redis hash stored Object>>>>>getMap  begin=====");
+		Map<String, MerchantLimit> merLimitMap = (Map<String, MerchantLimit>)redisHashTemplate.opsForHash().entries(redisKey);
+		if(merLimitMap!=null && merLimitMap.size()>0){
+			Set<Map.Entry<String, MerchantLimit>> sets = merLimitMap.entrySet();
+			for(Iterator<Map.Entry<String, MerchantLimit>> it = sets.iterator(); it.hasNext(); ){
+				Map.Entry<String, MerchantLimit> entry = it.next();
+				String key = entry.getKey();
+				MerchantLimit val = (MerchantLimit)entry.getValue();
+				System.out.println("---------------------------------------------------------");
+				System.out.println("key="+key+"|value="+val.toString());
+				//JSONObject jsonObj = JSONObject.fromObject(merchantLimit);
+				//System.out.println(String.format("key=s%,val=s%", key, jsonObj.toString()));
+			}
+		}
+		System.out.println("=====redis hash stored Object>>>>>getMap  end=====");*/
+		System.out.println("=====redis hash stored Object>>>>>getList  begin=====");
+		List<Object> valList = redisHashTemplate.opsForHash().values(redisKey);
+		if(valList!=null && valList.size()>0){
+			for(Object obj : valList){
+				MerchantLimit tmp = (MerchantLimit)obj;
+				System.out.println("---------------------------------------------------------");
+				System.out.println("id="+tmp.getId()+"|obj="+tmp.toString());
+			}
+		}
+		//compare txn.payAmount and merchangLimit
+		//System.out.println("checkResult: "+compareMerLimit(valList));
+		System.out.println("=====redis hash stored Object>>>>>getList  end=====");
+	}
+	
+	
+	public static boolean compareMerLimit(List<Object> merLimitList){
+		String upMerchantId="812025145110002";
+		String merchantTerminalId="12344321";
+		String payMode="11";
+		BigDecimal payAmount = new BigDecimal(100);
+		for(Object data : merLimitList){
+			MerchantLimit tmp = (MerchantLimit)data;
+			System.out.println("id："+tmp.getId());
+			if(!upMerchantId.equals(tmp.getUpMerchantId())){
+				continue;
+			}
+			if(StringUtils.isNotBlank(tmp.getMerchantTerminalId()) && !merchantTerminalId.equals(tmp.getMerchantTerminalId())){
+				continue;
+			}
+			String cachePayMode = tmp.getPayMode();
+			if(StringUtils.isNotBlank(cachePayMode) && !("0".equals(cachePayMode) || payMode.equals(cachePayMode))){
+				continue;
+			}
+			//限额单位元：*100
+			BigDecimal minLimit = tmp.getMinLimit();
+			BigDecimal maxLimit = tmp.getMaxLimit();
+			System.out.println(">>>>>[cache merchantLimit] minLimit="+minLimit+",maxLimit="+maxLimit);
+			if(minLimit!=null && maxLimit!=null){
+				minLimit = minLimit.multiply(new BigDecimal(100));
+				maxLimit = maxLimit.multiply(new BigDecimal(100));
+				if(minLimit.compareTo(payAmount)!=1 && payAmount.compareTo(maxLimit)!=1){
+					System.out.println(">>>>>hit merchantLimit[id="+tmp.getId()+",minLimit="+minLimit+",maxLimit="+maxLimit+"]");
+					return true;
+				}else{
+					continue;
+				}
+			}else{
+				continue;
+			}
+		}
+		return false;
+	}
+	
 }

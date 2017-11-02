@@ -12,5 +12,9 @@
 	<classpathentry kind="lib" path="src/main/resources/lib/log4j-1.2-api-2.3.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/lib/rm-cps-rulemanager-4.4.19.1.jar"/>
 	<classpathentry kind="lib" path="src/main/resources/lib/rm-common-4.4.30.2.jar"/>
+	<classpathentry kind="lib" path="extLib/rm-rtms-parallel-test.jar"/>
+	<classpathentry kind="lib" path="extLib/safeguard-payapi-3.1.2.8.jar"/>
+	<classpathentry kind="lib" path="extLib/safeguard-txbase-pay-3.1.2.6.jar"/>
+	<classpathentry kind="lib" path="extLib/netty-all-4.0.34.Final.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
