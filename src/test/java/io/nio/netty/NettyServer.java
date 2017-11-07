@@ -14,9 +14,10 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
 /**
- * 
+ * netty server端
  * @author daniel.fang
- *
+ * 
+ * 测试：telnet 127.0.0.1 8001
  */
 public class NettyServer {
 	private static final String HOST = "127.0.0.1";
@@ -26,7 +27,6 @@ public class NettyServer {
 	private static final EventLoopGroup bossGroup = new NioEventLoopGroup(BOSS_GROUP_SIZE);
 	private static final EventLoopGroup workerGroup = new NioEventLoopGroup(WORKER_GROUP_SIZE);
 	
-
     public static void main(String[] args) throws InterruptedException, ExecutionException {
     	try{
             ServerBootstrap bootstrap = new ServerBootstrap();
@@ -42,7 +42,7 @@ public class NettyServer {
             });
             // Start the client.
             ChannelFuture cf = bootstrap.bind(HOST, PORT).sync();
-            System.out.println("start server success, you can telnet 127.0.0.1 8001 to send massage for this server");
+            System.out.println("start server success, you can telnet "+HOST+" "+PORT+" to send massage for this server");
             // Wait until the connection is closed.
             cf.channel().closeFuture().sync();
     	}catch(Exception e){

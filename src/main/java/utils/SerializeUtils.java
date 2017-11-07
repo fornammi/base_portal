@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.math.BigDecimal;
 
 import com.bill99.golden.inf.sso.util.CM;
 import com.test.model.MerchantLimit;
@@ -88,8 +89,8 @@ public class SerializeUtils {
 		MerchantLimit tmp = new MerchantLimit();
 		tmp.setId(iLong);
 		tmp.setUpMerchantId("1");
-		tmp.setMinLimit(iLong);
-		tmp.setMaxLimit(iLong + 99L);
+		tmp.setMinLimit(new BigDecimal(iLong));
+		tmp.setMaxLimit(new BigDecimal(iLong + 99L));
 		tmp.setCreaterName("nammi"+1);
 		//redis hash中Map的key必须为String
 		byte[] valArr = SerializeUtils.serializeObj(tmp);
