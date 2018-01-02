@@ -1,4 +1,4 @@
-package rule.engine;
+package rule.engine.skeye;
 
 import java.net.URL;
 import java.util.ArrayList;

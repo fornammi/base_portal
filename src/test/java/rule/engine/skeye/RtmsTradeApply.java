@@ -1,4 +1,4 @@
-package rule.engine;
+package rule.engine.skeye;
 
 import java.io.Serializable;
 
